@@ -88,16 +88,17 @@ export default function InvoiceListPage() {
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: "center", //horizontan center
         padding: 24,
         minHeight: "100vh",
+        justifyContent: "flex-start",
+        paddingTop: 40,
       }}
     >
       <div
         style={{
           width: "100%",
           maxWidth: 800,
-          marginBottom: 16,
+          margin: "0 auto 16px", // ← horizontal centering + bottom margin
         }}
       >
         <RangePicker
@@ -116,6 +117,7 @@ export default function InvoiceListPage() {
         style={{
           width: "100%",
           maxWidth: 800,
+          margin: "0 auto", // ← horizontal centering
         }}
       >
         <Table

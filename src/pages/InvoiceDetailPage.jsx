@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useParams, useLocation, Navigate } from "react-router-dom";
 import { Card, Descriptions } from "antd";
 import { useTranslation } from "react-i18next";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 export default function InvoiceDetailPage() {
   const { t } = useTranslation();
@@ -21,41 +21,56 @@ export default function InvoiceDetailPage() {
     invoice.paymentDetails?.totalAmount ?? invoice.taxInclusiveAmount ?? "N/A";
 
   return (
-    <Card
-      title={`${t("invoice.detailTitle")}: ${invoice.invoiceNumber}`}
+    <div
       style={{
-        margin: 24,
-        maxWidth: 800,
-        marginLeft: "auto",
-        marginRight: "auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        padding: 24,
       }}
     >
-      <Descriptions bordered column={1} size="small">
-        <Descriptions.Item label={t("invoice.no")}>
-          {invoice.invoiceNumber}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.date")}>
-          {dayjs(invoice.issueDate).format('DD/MM/YYYY')}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.amount")}>
-          {amount} {invoice.currency}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.status")}>
-          {invoice.status}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.customer")}>
-          {invoice.customerName}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.supplier")}>
-          {invoice.supplierName}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.dueDate")}>
-          {invoice.dueDate ? dayjs(invoice.dueDate).format("DD/MM/YYYY") : "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.errorMessage")}>
-          {invoice.errorMessage || "-"}
-        </Descriptions.Item>
-      </Descriptions>
-    </Card>
+      <div
+        style={{
+          maxWidth: 800,
+          width: "100%",
+          margin: "0 auto", // ← horizontal centering
+        }}
+      >
+        <Card
+          title={`${t("invoice.detailTitle")}: ${invoice.invoiceNumber}`}
+          style={{ maxWidth: 800, width: "100%" }}
+        >
+          <Descriptions bordered column={1} size="small">
+            <Descriptions.Item label={t("invoice.no")}>
+              {invoice.invoiceNumber}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.date")}>
+              {dayjs(invoice.issueDate).format("DD/MM/YYYY")}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.amount")}>
+              {amount} {invoice.currency}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.status")}>
+              {invoice.status}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.customer")}>
+              {invoice.customerName}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.supplier")}>
+              {invoice.supplierName}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.dueDate")}>
+              {invoice.dueDate
+                ? dayjs(invoice.dueDate).format("DD/MM/YYYY")
+                : "-"}
+            </Descriptions.Item>
+            <Descriptions.Item label={t("invoice.errorMessage")}>
+              {invoice.errorMessage || "-"}
+            </Descriptions.Item>
+          </Descriptions>
+        </Card>
+      </div>
+    </div>
   );
 }
