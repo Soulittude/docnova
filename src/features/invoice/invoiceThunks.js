@@ -13,7 +13,7 @@ export const fetchInvoices = createAsyncThunk(
             const response = await searchInvoices(filter, token);
             return response.data; // assume { content: [...], totalElements, ... }
         } catch (err) {
-            const msg = err.response?.data?.message || "Invoices list wasn't able to fetch";
+            const msg = err.response?.data?.message || "Invoice list fetch failed.";
             return rejectWithValue(msg);
         }
     }

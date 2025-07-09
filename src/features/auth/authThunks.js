@@ -6,12 +6,16 @@ export const login = createAsyncThunk(
     async ({ email, password }, { rejectWithValue }) => {
         try {
             const response = await loginRequest({ email, password });
-            //API return {}
-            return response.data.user;
+            // data = { user: {...}, jwt: '…', … }
+            return {
+                // embed the entire user object…
+                ...response.data.user,
+                // …and also bring in the token
+                jwt: response.data.jwt,
+            };
         } catch (err) {
-            const message =
-                err.response?.data?.message || 'Login failed. Please try again.';
-            return rejectWithValue(message);
+            const msg = err.response?.data?.message || 'Login failed.';
+            return rejectWithValue(msg);
         }
     }
 );

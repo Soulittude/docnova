@@ -25,7 +25,7 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.user = action.payload;  // store user.jwt here
+                state.user = action.payload;  // contains jwt
             })
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
