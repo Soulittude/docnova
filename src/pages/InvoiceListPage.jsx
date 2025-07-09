@@ -47,20 +47,25 @@ export default function InvoiceListPage() {
   const columns = [
     {
       title: t("invoice.no"),
-      dataIndex: "invoiceNo",
-      key: "invoiceNo",
+      dataIndex: "invoiceNumber",
+      key: "invoiceNumber",
     },
     {
       title: t("invoice.date"),
       dataIndex: "issueDate",
       key: "issueDate",
-      render: (date) => dayjs(date).format(DD / MM / YYYY),
+      render: (date) => dayjs(date).format("DD / MM / YYYY"),
     },
     {
       title: t("invoice.amount"),
-      dataIndex: "totalAmount",
-      key: "totalAmount",
-      render: (val) => `${val} ₺`,
+      key: "amount",
+      render: (_, record) => {
+        // prefer the paymentDetails.totalAmount, fallback to taxInclusiveAmount
+        const amt =
+          record.paymentDetails?.totalAmount ?? record.taxInclusiveAmount;
+        // show the currency, e.g. "132.84 EUR"
+        return `${amt} ${record.currency || ""}`;
+      },
     },
     {
       title: t("invoice.status"),

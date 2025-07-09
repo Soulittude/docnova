@@ -1,9 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { searchInvoices } from "../../api/invoice";
-
 export const fetchInvoices = createAsyncThunk(
     'invoice/fetchAll',
-    //filter should include companyId, documentType, startDate, endDate, page, size etc.
     async ({ filter }, { getState, rejectWithValue }) => {
         const token = getState().auth.user?.jwt;
         if (!token) {
@@ -11,9 +9,14 @@ export const fetchInvoices = createAsyncThunk(
         }
         try {
             const response = await searchInvoices(filter, token);
-            return response.data; // assume { content: [...], totalElements, ... }
+            // API returns { invoices: { content: [...], totalElements, ... }, netTotal, total, totalCount }
+            const page = response.data.invoices;
+            return {
+                items: page.content,
+                total: page.totalElements,
+            };
         } catch (err) {
-            const msg = err.response?.data?.message || "Invoice list fetch failed.";
+            const msg = err.response?.data?.message || 'Fatura listesi alınamadı.';
             return rejectWithValue(msg);
         }
     }
