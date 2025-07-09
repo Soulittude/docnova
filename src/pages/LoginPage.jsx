@@ -30,9 +30,9 @@ export default function LoginPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh", // full viewport height
-        padding: "0 16px", // a little horizontal breathing room
-        backgroundColor: "pink",
+        height: "100vh",
+        width: "100vw",
+        padding: "0 16px",
       }}
     >
       <Form
@@ -40,9 +40,9 @@ export default function LoginPage() {
         layout="vertical"
         onFinish={onFinish}
         style={{
-          maxWidth: 300,
-          margin: "auto",
-          marginTop: "100px",
+          width: 300,
+
+          backgroundColor: "pink",
         }}
       >
         <Form.Item
