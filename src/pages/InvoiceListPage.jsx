@@ -4,10 +4,12 @@ import { fetchInvoices } from "../features/invoice/invoiceThunks";
 import { Table, Button, DatePicker, Row, Col, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const { RangePicker } = DatePicker;
 
 export default function InvoiceListPage() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items, total, status, error } = useSelector((state) => state.invoice);
@@ -44,33 +46,33 @@ export default function InvoiceListPage() {
 
   const columns = [
     {
-      title: "Invoice No",
-      dataIndex: "invoiceNumber",
-      key: "invoiceNumber",
+      title: t("invoice.no"),
+      dataIndex: "invoiceNo",
+      key: "invoiceNo",
     },
     {
-      title: "Date",
+      title: t("invoice.date"),
       dataIndex: "issueDate",
       key: "issueDate",
       render: (date) => dayjs(date).format(DD / MM / YYYY),
     },
     {
-      title: "Amount",
+      title: t("invoice.amount"),
       dataIndex: "totalAmount",
       key: "totalAmount",
       render: (val) => `${val} ₺`,
     },
     {
-      title: "Status",
+      title: t("invoice.status"),
       dataIndex: "status",
       key: "status",
     },
     {
-      title: "Detail",
+      title: t("invoice.detail"),
       key: "detail",
       render: (_, record) => (
         <Button onClick={() => navigate(`/invoices/${record.id}`)}>
-          Detail
+          {t("invoice.detail")}
         </Button>
       ),
     },

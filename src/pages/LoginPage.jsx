@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authThunks";
 import { Navigate } from "react-router-dom";
 import { Form, Input, Button, message } from "antd";
-import FormItem from "antd/es/form/FormItem";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user, status, error } = useSelector((state) => state.auth);
   const [form] = Form.useForm();
@@ -28,17 +29,22 @@ export default function LoginPage() {
       form={form}
       layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 300, margin: "auto", marginTop: "100px", backgroundColor:"pink" }}
+      style={{
+        maxWidth: 300,
+        margin: "auto",
+        marginTop: "100px",
+        backgroundColor: "pink",
+      }}
     >
       <Form.Item
-        label="E-mail"
+        label={t("login.email")}
         name="email"
         rules={[{ required: true, message: "Enter your email" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        label="Password"
+        label={t("login.password")}
         name="password"
         rules={[{ required: true, message: "Enter your password" }]}
       >
@@ -51,7 +57,7 @@ export default function LoginPage() {
           loading={status === "loading"}
           block
         >
-          Login
+          {t("login.submit")}
         </Button>
       </Form.Item>
       {error && <div style={{ color: "red" }}>{error}</div>}

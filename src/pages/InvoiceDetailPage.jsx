@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { useParams, Navigate } from "react-router-dom";
 import { Card, Descriptions } from "antd";
+import { useTranslation } from "react-i18next";
 
 export default function InvoiceDetailPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const invoice = useSelector((state) =>
     state.invoice.items.find((inv) => inv.id === id)
@@ -18,15 +20,18 @@ export default function InvoiceDetailPage() {
       style={{ margin: 24 }}
     >
       <Descriptions bordered column={1}>
-        <Descriptions.Item label="Date">{invoice.issueDate}</Descriptions.Item>
-        <Descriptions.Item label="Amount">
+        <Descriptions.Item label={t("invoice.date")}>
+          {invoice.issueDate}
+        </Descriptions.Item>
+        <Descriptions.Item label={t("invoice.amount")}>
           {invoice.totalAmount} ₺
         </Descriptions.Item>
-        <Descriptions.Item label="Status">{invoice.status}</Descriptions.Item>
-        <Descriptions.Item label="Description">
+        <Descriptions.Item label={t("invoice.status")}>
+          {invoice.status}
+        </Descriptions.Item>
+        <Descriptions.Item label={t("invoice.description")}>
           {invoice.description || "-"}
         </Descriptions.Item>
-        {/* add more fields as needed */}
       </Descriptions>
     </Card>
   );
