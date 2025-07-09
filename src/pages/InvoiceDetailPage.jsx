@@ -1,36 +1,59 @@
 import { useSelector } from "react-redux";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, useLocation, Navigate } from "react-router-dom";
 import { Card, Descriptions } from "antd";
 import { useTranslation } from "react-i18next";
+import dayjs from 'dayjs';
 
 export default function InvoiceDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
-  const invoice = useSelector((state) =>
+  const reduxInvoice = useSelector((state) =>
     state.invoice.items.find((inv) => inv.id === id)
   );
+  const invoice = reduxInvoice || location.state?.invoice;
+
   if (!invoice) {
     //If no invoice found(maybe reload), redirect back
     return <Navigate to="/invoices" replace />;
   }
 
+  const amount =
+    invoice.paymentDetails?.totalAmount ?? invoice.taxInclusiveAmount ?? "N/A";
+
   return (
     <Card
-      title={`Invoice Detail: ${invoice.invoiceNumber}`}
-      style={{ margin: 24 }}
+      title={`${t("invoice.detailTitle")}: ${invoice.invoiceNumber}`}
+      style={{
+        margin: 24,
+        maxWidth: 800,
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
     >
-      <Descriptions bordered column={1}>
+      <Descriptions bordered column={1} size="small">
+        <Descriptions.Item label={t("invoice.no")}>
+          {invoice.invoiceNumber}
+        </Descriptions.Item>
         <Descriptions.Item label={t("invoice.date")}>
-          {invoice.issueDate}
+          {dayjs(invoice.issueDate).format('DD/MM/YYYY')}
         </Descriptions.Item>
         <Descriptions.Item label={t("invoice.amount")}>
-          {invoice.totalAmount} ₺
+          {amount} {invoice.currency}
         </Descriptions.Item>
         <Descriptions.Item label={t("invoice.status")}>
           {invoice.status}
         </Descriptions.Item>
-        <Descriptions.Item label={t("invoice.description")}>
-          {invoice.description || "-"}
+        <Descriptions.Item label={t("invoice.customer")}>
+          {invoice.customerName}
+        </Descriptions.Item>
+        <Descriptions.Item label={t("invoice.supplier")}>
+          {invoice.supplierName}
+        </Descriptions.Item>
+        <Descriptions.Item label={t("invoice.dueDate")}>
+          {invoice.dueDate ? dayjs(invoice.dueDate).format("DD/MM/YYYY") : "-"}
+        </Descriptions.Item>
+        <Descriptions.Item label={t("invoice.errorMessage")}>
+          {invoice.errorMessage || "-"}
         </Descriptions.Item>
       </Descriptions>
     </Card>

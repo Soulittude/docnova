@@ -5,9 +5,14 @@
     "login.emailwarn": "Please enter your e-mail",
     "login.passwarn": "Please enter your password",
     "invoice.listTitle": "Invoice List",
+    "invoice.detail": "Detail",
+    "invoice.detailTitle": "Invoice Detail",
     "invoice.no": "Invoice No",
     "invoice.date": "Date",
     "invoice.amount": "Amount",
     "invoice.status": "Status",
-    "invoice.detail": "Detail"
+    "invoice.customer": "Customer",
+    "invoice.supplier": "Supplier",
+    "invoice.dueDate": "Due Date",
+    "invoice.errorMessage": "Error Message"
 }
