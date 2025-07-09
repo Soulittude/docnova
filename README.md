@@ -24,7 +24,7 @@ Bu proje, React.js, Redux Toolkit ve Ant Design kullanarak 3 sayfalı bir örnek
 1. Depoyu klonlayın:
 
    ```bash
-   git clone https://github.com/kullaniciAdi/docnova.git
+   git clone https://github.com/Soulittude/docnova.git
    cd docnova
    ```
 2. Bağımlılıkları yükleyin:
