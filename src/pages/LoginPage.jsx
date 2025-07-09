@@ -25,42 +25,52 @@ export default function LoginPage() {
   if (user) return <Navigate to="/invoices" replace />;
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
+    <div
       style={{
-        maxWidth: 300,
-        margin: "auto",
-        marginTop: "100px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh", // full viewport height
+        padding: "0 16px", // a little horizontal breathing room
         backgroundColor: "pink",
       }}
     >
-      <Form.Item
-        label={t("login.email")}
-        name="email"
-        rules={[{ required: true, message: "Enter your email" }]}
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        style={{
+          maxWidth: 300,
+          margin: "auto",
+          marginTop: "100px",
+        }}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label={t("login.password")}
-        name="password"
-        rules={[{ required: true, message: "Enter your password" }]}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          loading={status === "loading"}
-          block
+        <Form.Item
+          label={t("login.email")}
+          name="email"
+          rules={[{ required: true, message: t("login.emailwarn") }]}
         >
-          {t("login.submit")}
-        </Button>
-      </Form.Item>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-    </Form>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label={t("login.password")}
+          name="password"
+          rules={[{ required: true, message: t("login.passwarn") }]}
+        >
+          <Input.Password />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={status === "loading"}
+            block
+          >
+            {t("login.submit")}
+          </Button>
+        </Form.Item>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+      </Form>
+    </div>
   );
 }

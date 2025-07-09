@@ -2,6 +2,8 @@
     "login.email": "E-mail",
     "login.password": "Password",
     "login.submit": "Sign In",
+    "login.emailwarn": "Please enter your e-mail",
+    "login.passwarn": "Please enter your password",
     "invoice.listTitle": "Invoice List",
     "invoice.no": "Invoice No",
     "invoice.date": "Date",
