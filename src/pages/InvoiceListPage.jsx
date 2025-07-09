@@ -79,38 +79,58 @@ export default function InvoiceListPage() {
   ];
 
   return (
-    <div style={{ padding: 24 }}>
-      <Row gutter={16} style={{ marginBottom: 16 }}>
-        <Col>
-          <RangePicker
-            value={dates}
-            onChange={(vals) => {
-              if (vals) {
-                setDates(vals);
-                loadInvoices(1, vals);
-                setPage(1);
-              }
-            }}
-          />
-        </Col>
-      </Row>
-      <Table
-        rowKey="id"
-        loading={status === "loading"}
-        columns={columns}
-        dataSource={items}
-        pagination={{
-          current: page,
-          total,
-          pageSize: 20,
-          onChange: (p) => {
-            setPage(p);
-            loadInvoices(p);
-          },
-          showSizeChanger: false,
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center", //horizontan center
+        padding: 24,
+        minHeight: "100vh",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 800,
+          marginBottom: 16,
         }}
-      />
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      >
+        <RangePicker
+          value={dates}
+          style={{ width: "100%" }}
+          onChange={(vals) => {
+            if (vals) {
+              setDates(vals);
+              loadInvoices(1, vals);
+              setPage(1);
+            }
+          }}
+        />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 800,
+        }}
+      >
+        <Table
+          rowKey="id"
+          loading={status === "loading"}
+          columns={columns}
+          dataSource={items}
+          pagination={{
+            current: page,
+            total,
+            pageSize: 20,
+            onChange: (p) => {
+              setPage(p);
+              loadInvoices(p);
+            },
+            showSizeChanger: false,
+          }}
+        />
+      </div>
+      {error && <div style={{ color: "red", marginTop: 16 }}>{error}</div>}
     </div>
   );
 }
