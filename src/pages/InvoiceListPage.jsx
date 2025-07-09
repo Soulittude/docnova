@@ -1,1 +1,3 @@
-export default InvoiceListPage;
+export default function InvoiceListPage() {
+  return <></>;
+}

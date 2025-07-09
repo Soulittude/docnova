@@ -1,1 +1,3 @@
-export default InvoiceDetailPage;
+export default function InvoiceDetailPage() {
+  return <></>;
+}

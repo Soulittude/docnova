@@ -1,11 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { login } from "./authThunks";
+import { createSlice } from '@reduxjs/toolkit';
+import { login } from './authThunks';
 
 const initialState = {
     user: null,
-    status: 'idle',
+    status: 'idle',  // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
 };
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -24,13 +25,13 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.user = action.payload;
+                state.user = action.payload;  // store user.jwt here
             })
             .addCase(login.rejected, (state, action) => {
-                state.status = 'rejected';
-                state.user = action.payload;
+                state.status = 'failed';
+                state.error = action.payload;
             });
-    }
+    },
 });
 
 export const { logout } = authSlice.actions;

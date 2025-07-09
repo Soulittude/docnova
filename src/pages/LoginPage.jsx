@@ -28,7 +28,7 @@ export default function LoginPage() {
       form={form}
       layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 300, margin: "auto", marginTop: "100px" }}
+      style={{ maxWidth: 300, margin: "auto", marginTop: "100px", backgroundColor:"pink" }}
     >
       <Form.Item
         label="E-mail"
