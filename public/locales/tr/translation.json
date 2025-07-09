@@ -1,0 +1,11 @@
+{
+    "login.email": "Email",
+    "login.password": "Parola",
+    "login.submit": "Giriş Yap",
+    "invoice.listTitle": "Fatura Listesi",
+    "invoice.no": "Fatura No",
+    "invoice.date": "Tarih",
+    "invoice.amount": "Tutar",
+    "invoice.status": "Durum",
+    "invoice.detail": "Detay"
+}

@@ -1,0 +1,11 @@
+{
+    "login.email": "Email",
+    "login.password": "Password",
+    "login.submit": "Sign In",
+    "invoice.listTitle": "Invoice List",
+    "invoice.no": "Invoice No",
+    "invoice.date": "Date",
+    "invoice.amount": "Amount",
+    "invoice.status": "Status",
+    "invoice.detail": "Detail"
+}
