@@ -1,20 +1,30 @@
-import { useSelector } from "react-redux";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-import Loginpage from "./pages/LoginPage";
-import InvoiceDetailPage from "./pages/InvoiceDetailPage";
-import InvoiceListPage from "./pages/InvoiceListPage";
+// App.jsx
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import LogoutButton from './components/LogoutButton';
+import LoginPage from './pages/LoginPage';
+import InvoiceListPage from './pages/InvoiceListPage';
+import InvoiceDetailPage from './pages/InvoiceDetailPage';
 
 function PrivateRoute({ children }) {
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector(s => s.auth.user);
   return user ? children : <Navigate to="/login" replace />;
 }
 
 function App() {
+  const user = useSelector(s => s.auth.user);
+
   return (
     <BrowserRouter>
+      {/* always show language switcher */}
+      <LanguageSwitcher />
+
+      {/* only show logout if we have a user */}
+      {user && <LogoutButton />}
+
       <Routes>
-        <Route path="/login" element={<Loginpage />}></Route>
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/invoices"
           element={
@@ -22,7 +32,7 @@ function App() {
               <InvoiceListPage />
             </PrivateRoute>
           }
-        ></Route>
+        />
         <Route
           path="/invoices/:id"
           element={
@@ -30,8 +40,8 @@ function App() {
               <InvoiceDetailPage />
             </PrivateRoute>
           }
-        ></Route>
-        <Route path="*" element={<Navigate to="/login" replace />}></Route>
+        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
