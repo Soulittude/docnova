@@ -1,22 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInvoices } from "../features/invoice/invoiceThunks";
-import { Table, Button, message } from "antd";
+import { Table, Button, DatePicker, Row, Col, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+
+const { RangePicker } = DatePicker;
 
 export default function InvoiceListPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items, total, status, error } = useSelector((state) => state.invoice);
 
-  useEffect(() => {
+  //Local state for filters & pagination
+  const [dates, setDates] = useState([
+    dayjs("2025-06-27T00:00:00.000Z"),
+    dayjs("2025-07-04T08:31:10.422Z"),
+  ]);
+  const [page, setPage] = useState(1);
+
+  const loadInvoices = (pageIndex = 1, [start, end] = dates) => {
     const filter = {
       companyId: "01c880ca-46b5-4699-a477-616b84770071",
       documentType: "OUTGOING",
-      startDate: "2025-06-27T00:00:00.000Z",
-      endDate: "2025-07-04T08:31:10.422Z",
-      page: 0,
+      startDate: start.toISOString(),
+      endDate: end.toISOString(),
+      page: pageIndex - 1,
       size: 20,
       referenceDocument: "",
       type: null,
@@ -25,9 +34,13 @@ export default function InvoiceListPage() {
       isDeleted: false,
     };
     dispatch(fetchInvoices({ filter }))
-      .unwarp()
+      .unwrap()
       .catch((msg) => message.error(msg));
-  }, [dispatch]);
+  };
+
+  useEffect(() => {
+    loadInvoices(page);
+  }, []);
 
   const columns = [
     {
@@ -65,15 +78,33 @@ export default function InvoiceListPage() {
 
   return (
     <div style={{ padding: 24 }}>
-      <h2>Invoice List</h2>
+      <Row gutter={16} style={{ marginBottom: 16 }}>
+        <Col>
+          <RangePicker
+            value={dates}
+            onChange={(vals) => {
+              if (vals) {
+                setDates(vals);
+                loadInvoices(1, vals);
+                setPage(1);
+              }
+            }}
+          />
+        </Col>
+      </Row>
       <Table
         rowKey="id"
         loading={status === "loading"}
         columns={columns}
         dataSource={items}
         pagination={{
+          current: page,
           total,
           pageSize: 20,
+          onChange: (p) => {
+            setPage(p);
+            loadInvoices(p);
+          },
           showSizeChanger: false,
         }}
       />
