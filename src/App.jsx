@@ -5,7 +5,7 @@ import Loginpage from "./pages/LoginPage";
 import InvoiceDetailPage from "./pages/InvoiceDetailPage";
 import InvoiceListPage from "./pages/InvoiceListPage";
 
-function PrivateRoot({ children }) {
+function PrivateRoute({ children }) {
   const user = useSelector((state) => state.auth.user);
   return user ? children : <Navigate to="/login" replace />;
 }
