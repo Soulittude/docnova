@@ -16,7 +16,7 @@ export const fetchInvoices = createAsyncThunk(
                 total: page.totalElements,
             };
         } catch (err) {
-            const msg = err.response?.data?.message || 'Fatura listesi alınamadı.';
+            const msg = err.response?.data?.message || 'Invoice list fetch failed.';
             return rejectWithValue(msg);
         }
     }
