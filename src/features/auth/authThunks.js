@@ -14,7 +14,7 @@ export const login = createAsyncThunk(
                 jwt: response.data.jwt,
             };
         } catch (err) {
-            const msg = err.response?.data?.message || 'Login failed.';
+            const msg = err.response?.data?.message || t("login.failed");
             return rejectWithValue(msg);
         }
     }

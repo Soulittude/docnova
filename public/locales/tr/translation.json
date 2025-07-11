@@ -4,6 +4,7 @@
     "login.submit": "Giriş Yap",
     "login.emailwarn": "Lütfen e-posta adresinizi giriniz",
     "login.passwarn": "Lütfen şifrenizi giriniz",
+    "login.failed": "Giriş işlemi başarısız",
     "invoice.listTitle": "Fatura Listesi",
     "invoice.detail": "Detay",
     "invoice.detailTitle": "Fatura Detayı",
