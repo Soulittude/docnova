@@ -15,5 +15,7 @@
     "invoice.customer": "Müşteri",
     "invoice.supplier": "Tedarikçi",
     "invoice.dueDate": "Vade Tarihi",
-    "invoice.errorMessage": "Hata Mesajı"
+    "invoice.errorMessage": "Hata Mesajı",
+    "auth.error": "Auth token bulunamadı.",
+    "invoice.fetchfailed": "Fatura listesi getirme başarısız oldu."
 }

@@ -5,7 +5,7 @@ export const fetchInvoices = createAsyncThunk(
     async ({ filter }, { getState, rejectWithValue }) => {
         const token = getState().auth.user?.jwt;
         if (!token) {
-            return rejectWithValue('No authentication token found.');
+            return rejectWithValue(t("auth.error"));
         }
         try {
             const response = await searchInvoices(filter, token);
@@ -16,7 +16,7 @@ export const fetchInvoices = createAsyncThunk(
                 total: page.totalElements,
             };
         } catch (err) {
-            const msg = err.response?.data?.message || 'Invoice list fetch failed.';
+            const msg = err.response?.data?.message || t("invoice.fetchfailed");
             return rejectWithValue(msg);
         }
     }
