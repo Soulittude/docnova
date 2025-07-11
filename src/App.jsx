@@ -1,4 +1,3 @@
-// App.jsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LanguageSwitcher from './components/LanguageSwitcher';
